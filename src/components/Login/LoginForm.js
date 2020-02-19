@@ -1,7 +1,12 @@
 import React, {Component } from 'react';
-import { StyleSheet, View, TextInput, TouchableOpacity, Text, StatusBar, onPress} from 'react-native';
+import { StyleSheet, View, TextInput, TouchableOpacity, Text, StatusBar, onChangeText} from 'react-native';
 
 export default class LoginForm extends Component {
+    state = {
+        email: '',
+        password: '',
+        authenticating: false,
+      }
     constructor(props){
         super(props)
     }
@@ -14,6 +19,8 @@ export default class LoginForm extends Component {
                 placeholderTextColor="rgba(255,255,255,0.7)"
                 returnKeyType="next"
                 onSubmitEditing={() => this.passwordInput.focus()}
+                onChangeText={email => this.setState({ email })}
+                value={this.state.email}
                 keyboardType="email-address"
                 autoCapitalize="none"
                 autoCorrect={false}
@@ -23,12 +30,14 @@ export default class LoginForm extends Component {
                 placeholder="Password"
                 placeholderTextColor="rgba(255,255,255,0.7)"
                 returnKeyType="go"
+                onChangeText={password => this.setState({ password })}
+                value={this.state.password}
                 secureTextEntry
                 style={styles.input}
                 ref={(input) => this.passwordInput = input}
                 /> 
 
-                <TouchableOpacity style={styles.buttonContainer} onPress={() => this.props.navigation.navigate('Home')}>
+                <TouchableOpacity style={styles.buttonContainer} onPress={() => console.log('pressed')}>
                     <Text style={styles.buttonText}>Login</Text>
                 </TouchableOpacity>
             </View>
